@@ -1,20 +1,55 @@
-package com.project.uber.uberApp.services;
+package com.project.uber.uberApp.services.impl;
 
 import com.project.uber.uberApp.dto.DriverDto;
 import com.project.uber.uberApp.dto.SignupDto;
 import com.project.uber.uberApp.dto.UserDto;
+import com.project.uber.uberApp.entities.Rider;
+import com.project.uber.uberApp.entities.User;
+import com.project.uber.uberApp.enums.Role;
+import com.project.uber.uberApp.exceptions.RuntimeConflictException;
+import com.project.uber.uberApp.repositories.UserRepository;
+import com.project.uber.uberApp.services.AuthService;
+import com.project.uber.uberApp.services.RiderService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class AuthServiceImpl implements AuthService{
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
+
+    private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final RiderService riderService;
+
     @Override
     public String login(String email, String password) {
         return null;
     }
 
     @Override
+    @Transactional
     public UserDto signup(SignupDto signupDto) {
-        return null;
+
+        User user = userRepository.findByEmail(signupDto.getEmail()).orElse(null);
+        if (user != null){
+            throw new RuntimeConflictException("Cannot signup, User already exists with email "+ signupDto.getEmail());
+        }
+
+        User mappedUser = modelMapper.map(signupDto, User.class);
+        mappedUser.setRoles(Set.of(Role.RIDER));
+        User savedUser = userRepository.save(mappedUser);
+
+//        create user related entities
+        riderService.createNewRider(savedUser);
+        // TODO add wallet related service here
+
+        return modelMapper.map(savedUser, UserDto.class);
     }
 
     @Override

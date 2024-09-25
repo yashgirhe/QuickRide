@@ -1,2 +1,6 @@
-package com.project.uber.uberApp.enums;public class PaymentStatus {
+package com.project.uber.uberApp.enums;
+
+public enum PaymentStatus {
+
+    PENDING, CONFIRMED, REFUNDED
 }
