@@ -4,7 +4,9 @@ package com.project.uber.uberApp.entities;
 import com.project.uber.uberApp.enums.PaymentMethod;
 import com.project.uber.uberApp.enums.RideStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.locationtech.jts.geom.Point;
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ride {
 
     @Id
@@ -27,7 +31,7 @@ public class Ride {
     private Point dropOffLocation;
 
     @CreationTimestamp
-    private LocalDateTime requestedTime;
+    private LocalDateTime createdTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Rider rider;

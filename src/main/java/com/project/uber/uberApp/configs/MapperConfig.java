@@ -1,16 +1,11 @@
 package com.project.uber.uberApp.configs;
 
 import com.project.uber.uberApp.dto.PointDto;
-import com.project.uber.uberApp.entities.RideRequest;
-import com.project.uber.uberApp.strategies.DriverMatchingStrategy;
-import com.project.uber.uberApp.strategies.impl.DriverMatchingHighestRatedDriverStrategy;
-import com.project.uber.uberApp.strategies.impl.DriverMatchingNearestDriverStrategy;
 import com.project.uber.uberApp.utils.GeometryUtil;
 import org.locationtech.jts.geom.Point;
-import org.springframework.context.annotation.Bean;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class MapperConfig {
