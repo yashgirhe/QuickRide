@@ -12,12 +12,16 @@ public class MapperConfig {
 
     @Bean
     public ModelMapper modelMapper(){
+
         ModelMapper mapper = new ModelMapper();
+
+//        convert PointDto to Point
         mapper.typeMap(PointDto.class, Point.class).setConverter(context -> {
                     PointDto pointDto = context.getSource();
                     return GeometryUtil.createPoint(pointDto);
                 });
 
+//        convert Point to PointDto
         mapper.typeMap(Point.class, PointDto.class).setConverter(context -> {
             Point point = context.getSource();
             double coordinates[] = {
