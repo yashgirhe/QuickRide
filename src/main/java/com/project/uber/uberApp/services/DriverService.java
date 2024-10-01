@@ -4,7 +4,6 @@ import com.project.uber.uberApp.dto.DriverDto;
 import com.project.uber.uberApp.dto.RideDto;
 import com.project.uber.uberApp.dto.RiderDto;
 import com.project.uber.uberApp.entities.Driver;
-import com.project.uber.uberApp.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
