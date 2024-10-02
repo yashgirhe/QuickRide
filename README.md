@@ -10,7 +10,10 @@ It saves your time to manually search for the cab and provides optimal ride fare
 * Request for driver: Rider can request to become a driver.
 * Payment: Currently the application hold 2 payment methods that are cash and wallet and the rider can choose any of those.
 
-* ## Technologies Used:
+## Technologies Used:
 * Back-End: Java, Spring Boot, Spring Security, Spring Data JPA
 * Database: PostgreSQL with PostGIS support
 * Authentication: JWT, Spring Security
+
+## UML Diagram
+![uber_ER](https://github.com/user-attachments/assets/60789dee-6c4c-4e0e-b96a-67c5e0823152)
