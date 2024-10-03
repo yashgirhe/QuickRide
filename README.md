@@ -45,7 +45,24 @@ It saves your time to manually search for the cab and provides optimal ride fare
 ![image](https://github.com/user-attachments/assets/90261331-4db3-4bbe-9076-db8a87914f57)
 ![image](https://github.com/user-attachments/assets/c68f5602-aec9-42aa-b2b9-975a2fdf9308)
 ![image](https://github.com/user-attachments/assets/da704d6b-169b-4d0e-87e7-f556d7a552b8)
-![image](https://github.com/user-attachments/assets/4eb10266-7f4f-43ae-9cd8-fdad86733076)
+![image](https://github.com/user-attachments/assets/31a22de9-7d41-4368-aa06-c038104c6553)
+![image](https://github.com/user-attachments/assets/ab839ccf-b546-45b8-affe-50b2b7172ec2)
+![image](https://github.com/user-attachments/assets/bdeeaad6-e07d-4edd-a308-1ce9d36017df)
+
+<!--# Getting Started
+## Prerequisites:
+This is an example of how to list things you need to use the software and how to install them.
+* Java 17+
+* PostgreSQL with PostGIS extension
+* Maven
+* IDE (Intellij prefered)
+
+## Prerequisites:
+  ```sh
+  npm install npm@latest -g
+  ```-->
+
+
 
 
 
