@@ -40,3 +40,13 @@ It saves your time to manually search for the cab and provides optimal ride fare
 * /auth/login - Driver can start the ride.
 * /auth/onBoardNewDriver/{userId} - Admin can onboard a new driver if the user make a request.
 * /auth/refresh - Refresh the access token if it expires.
+
+### Swagger Images
+![image](https://github.com/user-attachments/assets/90261331-4db3-4bbe-9076-db8a87914f57)
+![image](https://github.com/user-attachments/assets/c68f5602-aec9-42aa-b2b9-975a2fdf9308)
+![image](https://github.com/user-attachments/assets/da704d6b-169b-4d0e-87e7-f556d7a552b8)
+![image](https://github.com/user-attachments/assets/4eb10266-7f4f-43ae-9cd8-fdad86733076)
+
+
+
+
