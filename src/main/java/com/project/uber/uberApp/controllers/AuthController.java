@@ -2,6 +2,8 @@ package com.project.uber.uberApp.controllers;
 
 import com.project.uber.uberApp.dto.*;
 import com.project.uber.uberApp.services.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,21 +19,31 @@ import java.util.Arrays;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Tag(name = "Authentication APIs")
 public class AuthController {
 
     private final AuthService authService;
 
+    @Operation(
+            summary = "Sign up"
+    )
     @PostMapping("/signup")
     ResponseEntity<UserDto> signup(@RequestBody SignupDto signupDto) {
         return new ResponseEntity<>(authService.signup(signupDto), HttpStatus.CREATED);
     }
 
+    @Operation(
+            summary = "Onboard new driver"
+    )
     @Secured("ROLE_ADMIN")
     @PostMapping("/onBoardNewDriver/{userId}")
     ResponseEntity<DriverDto> onBoardNewDriver(@PathVariable Long userId, @RequestBody OnBoardDriverDto onBoardDriverDto) {
         return new ResponseEntity<>(authService.onboardNewDriver(userId, onBoardDriverDto.getVehicleId()), HttpStatus.CREATED);
     }
 
+    @Operation(
+            summary = "Login"
+    )
     @PostMapping("/login")
     ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto,
                                            HttpServletResponse httpServletResponse) {
@@ -44,6 +56,9 @@ public class AuthController {
         return ResponseEntity.ok(new LoginResponseDto(tokens[0]));
     }
 
+    @Operation(
+            summary = "Refresh access token"
+    )
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponseDto> refresh(HttpServletRequest request) {
         String refreshToken = Arrays.stream(request.getCookies())

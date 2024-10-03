@@ -35,7 +35,6 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles
