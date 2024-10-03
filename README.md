@@ -1,5 +1,5 @@
 # QuickRide - Ride booking application
-UberApp is an online ride booking application that allows users to seamlessly book rides to their destinations. Whether you are a rider who wants to book a ride or you are a driver 
+QuickRide is an online ride booking application that allows users to seamlessly book rides to their destinations. Whether you are a rider who wants to book a ride or you are a driver 
 looking for customers, the platform is open for all.
 It saves your time to manually search for the cab and provides optimal ride fare for you.
 
