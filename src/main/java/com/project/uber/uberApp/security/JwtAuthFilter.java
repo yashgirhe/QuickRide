@@ -28,6 +28,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private final HandlerExceptionResolver handlerExceptionResolver;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -38,11 +39,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 return;
             }
 
+            //fetch token value excluding bearer
             String token = requestTokenHeader.split("Bearer ")[1];
+
             Long userId = jwtService.getUserIdFromToken(token);
 
+            //The userId is validated to ensure it's not null, and
+            // the SecurityContextHolder is checked to see if the current request is already authenticated.
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
                 User user = userService.getUserById(userId);
+
+                // Fetching the User and Creating Authentication Object
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(user, null, null);
 

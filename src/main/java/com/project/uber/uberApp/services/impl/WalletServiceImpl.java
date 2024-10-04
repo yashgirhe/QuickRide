@@ -9,9 +9,7 @@ import com.project.uber.uberApp.enums.TransactionType;
 import com.project.uber.uberApp.exceptions.ResourceNotFoundException;
 import com.project.uber.uberApp.repositories.WalletRepository;
 import com.project.uber.uberApp.services.WalletService;
-import com.project.uber.uberApp.services.WalletTransactionService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class WalletServiceImpl implements WalletService {
 
     private final WalletRepository walletRepository;
-    private final WalletTransactionService walletTransactionService;
-    private final ModelMapper modelMapper;
 
     @Override
     @Transactional
-    public Wallet addMoneyToWallet(User user, Double amount, String transactionId, Ride ride, TransactionMethod transactionMethod) {
+    public Wallet addMoneyToWallet(User user, Double amount,
+                                   String transactionId, Ride ride,
+                                   TransactionMethod transactionMethod) {
         Wallet wallet = findByUser(user);
         wallet.setBalance(wallet.getBalance()+amount);
 
@@ -38,7 +36,7 @@ public class WalletServiceImpl implements WalletService {
                 .amount(amount)
                 .build();
 
-        walletTransactionService.createNewWalletTransaction(walletTransaction);
+        wallet.getTransactions().add(walletTransaction);
 
         return walletRepository.save(wallet);
     }
@@ -59,8 +57,6 @@ public class WalletServiceImpl implements WalletService {
                 .transactionMethod(transactionMethod)
                 .amount(amount)
                 .build();
-
-//        walletTransactionService.createNewWalletTransaction(walletTransaction);
 
         wallet.getTransactions().add(walletTransaction);
 

@@ -24,6 +24,6 @@ public class Wallet {
 
     private Double balance = 0.0;
 
-    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WalletTransaction> transactions;
 }
