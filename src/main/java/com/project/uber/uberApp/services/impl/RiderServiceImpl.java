@@ -10,10 +10,7 @@ import com.project.uber.uberApp.enums.RideStatus;
 import com.project.uber.uberApp.exceptions.ResourceNotFoundException;
 import com.project.uber.uberApp.repositories.RideRequestRepository;
 import com.project.uber.uberApp.repositories.RiderRepository;
-import com.project.uber.uberApp.services.DriverService;
-import com.project.uber.uberApp.services.RatingService;
-import com.project.uber.uberApp.services.RideService;
-import com.project.uber.uberApp.services.RiderService;
+import com.project.uber.uberApp.services.*;
 import com.project.uber.uberApp.strategies.RideStrategyManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +36,7 @@ public class RiderServiceImpl implements RiderService {
     private final RideService rideService;
     private final DriverService driverService;
     private final RatingService ratingService;
+    private final EmailSenderService emailSenderService;
 
     @Override
     @Transactional
@@ -55,7 +54,12 @@ public class RiderServiceImpl implements RiderService {
         List<Driver> drivers = rideStrategyManager
                 .driverMatchingStrategy(rider.getRating()).findMatchingDriver(rideRequest);
 
-//        TODO : Send notification to all the drivers about this ride request
+        List<String> emailList  = new ArrayList<>();
+
+        for (Driver driver : drivers){
+            emailList.add(driver.getUser().getEmail());
+        }
+        emailSenderService.sendEmail(emailList, "New Ride", "New ride request for you.");
 
         return modelMapper.map(savedRideRequest, RideRequestDto.class);
     }
